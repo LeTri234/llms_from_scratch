@@ -1,0 +1,8 @@
+[package]
+name = "ch02"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+reqwest = { workspace = true }
+regex = { workspace = true }
