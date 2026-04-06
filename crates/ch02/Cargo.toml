@@ -6,3 +6,4 @@ edition.workspace = true
 [dependencies]
 reqwest = { workspace = true }
 regex = { workspace = true }
+tiktoken-rs = {workspace = true}

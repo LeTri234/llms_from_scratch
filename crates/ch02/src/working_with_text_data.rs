@@ -34,14 +34,15 @@ pub fn write_text_to_file() -> Result<(), Box<dyn std::error::Error>> {
 
 pub fn read_text_from_file() -> Result<String, Box<dyn std::error::Error>> {
     let path = Path::new("the-verdict.txt");
-    let contents = std::fs::read_to_string(path)?;
-    let char_count = contents.chars().count();
+    let raw_text = std::fs::read_to_string(path)?;
+    let normalized_text = raw_text.replace("\r\n", "\n");
+    let char_count = normalized_text.chars().count();
     println!("The file contains {} characters.", char_count);
 
-    let snippet: String = contents.chars().take(99).collect();
+    let snippet: String = normalized_text.chars().take(99).collect();
     println!("First 99 characters:\n{}", snippet);
 
-    Ok(contents)
+    Ok(normalized_text)
 }
 
 // The goal is to tokenize and  embed this text for an LLM
@@ -143,6 +144,5 @@ mod tests {
 
         let vocab = token_to_token_ids(preprocessed);
         assert!(!vocab.is_empty());
-
     }
 }
